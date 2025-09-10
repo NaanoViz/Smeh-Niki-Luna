@@ -1,4 +1,4 @@
-body {background-color: #565252;}
+body {background-color: #ccc8c8;}
 
 body {color: #858585;}
 
@@ -34,8 +34,11 @@ h1#name {
 }
 
 #Experience li {
-  display: block;                
-  margin: 15px 0;                
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;                
+  margin: 15px 0;                 
   padding: 20px;                
   background-color: #f0f8ff;    
   border-radius: 8px;           
@@ -48,6 +51,13 @@ h1#name {
   background-color: #e0f7fa;     
   transform: scale(1.05);         
   transition: background-color 0.3s, transform 0.3s; 
+}
+
+#Connect {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px 0;
 }
 
 #Connect ul {
