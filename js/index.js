@@ -63,4 +63,37 @@ messageForm.addEventListener("submit", function(event) {
     messageForm.reset();
 });
 
+//Lesson 13 Fetch API, Project
+fetch("https://api.github.com/users/NaanoViz/repos")
+    .then((response) => {
+        if (!response.ok){
+            throw new Error("Unable to get data... ");
+            }
+    return response.json(); // Can do a response.json instead, but its okay. return response.json() Safer for security? Why?
+    })
 
+    .then((repositories) => {
+    //repositories = JSON.parse(this.repositories); //This line isn't required if you do response.json(), didn't work for some reason...
+        console.log("The Repositories values- ", repositories);
+        const projectSection = document.getElementById("Projects");
+        const projectList = projectSection.querySelector("ul");
+        projectList.innerHTML = "";
+
+        for (let i = 0; i < repositories.length; i++){
+            const project = document.createElement("li");
+            const createLink = document.createElement("a");
+            createLink.href = repositories[i].html_url; // TO set innert text to Array element Name
+            createLink.textContent = repositories[i].name;
+            project.appendChild(createLink); // can Use if (!repositories[i].fork) {} If want to private vs public
+            projectList.appendChild(project);
+        }
+    })
+
+    .catch((error) => {
+        console.error("Failed to get repositories", error);
+        
+        const projectSection = document.getElementById("Projects");
+        const messageError = document.createElement("p");
+        messageError.innerHTML = 'Failed to load, Reload please.';
+        projectSection.appendChild(messageError);
+    });
